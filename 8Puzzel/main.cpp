@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#include <iostream>
+
 #include "Board.h"
 
 int main()
@@ -12,33 +14,51 @@ int main()
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            if (event.type == sf::Event::KeyPressed)
+            sf::Event event;
+            while (window.pollEvent(event))
             {
-                switch (event.key.code)
+                if (event.type == sf::Event::Closed)
+                    window.close();
+
+                if (event.type == sf::Event::KeyPressed)
                 {
-                case(sf::Keyboard::Up):
+                    switch (event.key.code)
+                    {
+                    case(sf::Keyboard::Up):
+                        Board.moveValue('u');
+                        Board.updateZeroPosition();
+                        Board.updateBoard();
                         break;
-                case(sf::Keyboard::Down):
-                    break;
-                case(sf::Keyboard::Right):
-                    break;
-                case(sf::Keyboard::Left):
-                    break;
+                    case(sf::Keyboard::Down):
+                        Board.moveValue('d');
+                        Board.updateZeroPosition();
+                        Board.updateBoard();
+                        break;
+                    case(sf::Keyboard::Right):
+                        Board.moveValue('r');
+                        Board.updateZeroPosition();
+                        Board.updateBoard();
+                        break;
+                    case(sf::Keyboard::Left):
+                        Board.moveValue('l');
+                        Board.updateZeroPosition();
+                        Board.updateBoard();
+                        break;
+                    }
                 }
             }
-        }
 
-        window.clear();
+            window.clear();
 
-        Board.drawBoard(window);
+            Board.drawBoard(window);
 
-        window.display();
+            window.display();
+
+            if (Board.checkIfOver() == true)
+            {
+                std::cout << "OVER!!!\n";
+            }
+
     }
 
     return 0;

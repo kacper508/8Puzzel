@@ -13,9 +13,9 @@ private:
 
 	char possibleMove[BOARD_SIZE][BOARD_SIZE];
 	char valueBoard[BOARD_SIZE][BOARD_SIZE] = {
-		{'6','8','5'},
-		{'1','3','7'},
-		{'0','2','4'},
+		{'1','2','3'},
+		{'4','5','6'},
+		{'7','0','8'},
 	};
 
 public:
@@ -26,6 +26,10 @@ public:
 	void createBoard(sf::Font &Font);
 	void drawBoard(sf::RenderWindow &window);
 	void updateBoard();
+
+	bool checkIfOver();
+
+	void updateZeroPosition();
 
 	~Board();
 };

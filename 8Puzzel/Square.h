@@ -2,6 +2,8 @@
 class Square
 {
 private:
+
+
 	sf::RectangleShape SquareShape;
 	sf::Text SquareText;
 	char value;
