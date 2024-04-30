@@ -5,6 +5,8 @@
 class Board
 {
 private:
+	bool pause = true;
+	
 	sf::RectangleShape BoardShape;
 
 	std::vector<Square*> Squares;
@@ -21,7 +23,10 @@ private:
 public:
 	Board(sf::Font &Font);
 
-	void moveValue(char moveDirection);
+	bool getPauseValue();
+	void setPauseValue(bool value);
+	
+	bool moveValue(char moveDirection);
 
 	void createBoard(sf::Font &Font);
 	void drawBoard(sf::RenderWindow &window);
@@ -32,5 +37,8 @@ public:
 	void updateZeroPosition();
 
 	~Board();
+
+	friend class Shuffle;
+
 };
 

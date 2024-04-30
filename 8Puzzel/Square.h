@@ -1,11 +1,18 @@
 #pragma once
+
+#include <SFML/Graphics.hpp>
+
+#include "Global.h"
+
 class Square
 {
 private:
 
+	sf::Sprite Shape;
 
 	sf::RectangleShape SquareShape;
 	sf::Text SquareText;
+
 	char value;
 public:
 	Square();

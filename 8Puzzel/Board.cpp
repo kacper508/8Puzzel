@@ -18,7 +18,7 @@ Board::Board(sf::Font &Font)
 	updateZeroPosition();
 }
 
-void Board::moveValue(char moveDirection)
+bool Board::moveValue(char moveDirection)
 {
 	switch (moveDirection)
 	{
@@ -27,6 +27,7 @@ void Board::moveValue(char moveDirection)
 		{
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x] = this->valueBoard[this->zeroPosition.y - 1][this->zeroPosition.x];
 			this->valueBoard[this->zeroPosition.y - 1][this->zeroPosition.x] = '0';
+			return true;
 		}
 		break;
 	case 'u':
@@ -34,6 +35,7 @@ void Board::moveValue(char moveDirection)
 		{
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x] = this->valueBoard[this->zeroPosition.y + 1][this->zeroPosition.x];
 			this->valueBoard[this->zeroPosition.y + 1][this->zeroPosition.x] = '0';
+			return true;
 		}
 		break;
 	case 'l':
@@ -41,6 +43,7 @@ void Board::moveValue(char moveDirection)
 		{
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x] = this->valueBoard[this->zeroPosition.y][this->zeroPosition.x + 1];
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x + 1] = '0';
+			return true;
 		}
 		break;
 	case 'r':
@@ -48,9 +51,11 @@ void Board::moveValue(char moveDirection)
 		{
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x] = this->valueBoard[this->zeroPosition.y][this->zeroPosition.x - 1];
 			this->valueBoard[this->zeroPosition.y][this->zeroPosition.x - 1] = '0';
+			return true;
 		}
 		break;
 	}
+	return false;
 }
 
 void Board::createBoard(sf::Font &Font)
@@ -59,28 +64,21 @@ void Board::createBoard(sf::Font &Font)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
+			Square* newSquare = new Square;
+			newSquare->setValue(this->valueBoard[i][j]);
+			newSquare->setSquarePosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 			if (this->valueBoard[i][j] != '0')
 			{
-				Square* newSquare = new Square;
-				newSquare->setValue(this->valueBoard[i][j]);
-				newSquare->setSquarePosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE*BOARD_SIZE - SPACE_BETWEEN_SQUARES*2)/2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				newSquare->setSquareFillColor(sf::Color::Blue);
-				newSquare->setSquareTextString(std::to_string(newSquare->getValue()));
-				newSquare->setSquareTextFont(Font);
-				newSquare->setSquareTextPosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
-				Squares.push_back(newSquare);
 			}
 			else if (this->valueBoard[i][j] == '0')
 			{
-				Square* newSquare = new Square;
-				newSquare->setValue(this->valueBoard[i][j]);
-				newSquare->setSquarePosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				newSquare->setSquareFillColor(sf::Color::Red);
-				newSquare->setSquareTextString(std::to_string(newSquare->getValue()));
-				newSquare->setSquareTextFont(Font);
-				newSquare->setSquareTextPosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
-				Squares.push_back(newSquare);
 			}
+			newSquare->setSquareTextString(std::to_string(newSquare->getValue() - 48));
+			newSquare->setSquareTextFont(Font);
+			newSquare->setSquareTextPosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+			Squares.push_back(newSquare);
 		}
 	}
 }
@@ -91,7 +89,7 @@ void Board::drawBoard(sf::RenderWindow& window)
 	for (auto square : this->Squares)
 	{
 		window.draw(square->getRectangleShape());
-		//window.draw(square->getText());
+		//square->drawText(&window);
 	}
 }
 
@@ -159,6 +157,17 @@ Board::~Board()
 	{
 		delete square;
 	}
+}
+
+bool Board::getPauseValue()
+{
+	return this->pause;
+}
+
+void Board::setPauseValue(bool value)
+{
+	this->pause = value;
+	std::cout << this->pause << "\n";
 }
 
 

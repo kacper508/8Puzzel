@@ -1,11 +1,10 @@
-#include <SFML/Graphics.hpp>
-
 #include "Square.h"
-#include "Global.h"
 
 Square::Square()
 {
 	this->SquareShape.setSize(sf::Vector2f(SQUARE_SIZE, SQUARE_SIZE));
+
+	this->SquareText.setFillColor(sf::Color::White);
 	this->SquareText.setCharacterSize(CHARACTER_SIZE);
 	this->SquareText.setStyle(sf::Text::Bold);
 }

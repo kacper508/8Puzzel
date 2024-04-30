@@ -140,13 +140,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Shuffle.cpp" />
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="StateMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Shuffle.h" />
+    <ClInclude Include="Solver.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMan.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
