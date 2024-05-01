@@ -167,7 +167,6 @@ bool Board::getPauseValue()
 void Board::setPauseValue(bool value)
 {
 	this->pause = value;
-	std::cout << this->pause << "\n";
 }
 
 

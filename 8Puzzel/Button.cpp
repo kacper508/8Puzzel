@@ -27,7 +27,7 @@ void Button::drawButton(sf::RenderWindow& window)
 	window.draw(this->text);
 }
 
-void Button::update(const sf::Vector2f mousePosition)
+bool Button::update(const sf::Vector2f mousePosition)
 {
 	this->buttonState = BUTTON_IDLE;
 
@@ -45,14 +45,19 @@ void Button::update(const sf::Vector2f mousePosition)
 	{
 	case BUTTON_IDLE:
 		this->shape.setFillColor(this->idleColor);
+		return false;
 		break;
 	case BUTTON_HOVER:
 		this->shape.setFillColor(this->hoverColor);
+		return false;
 		break;
 	case BUTTON_PRESSED:
 		this->shape.setFillColor(this->activeColor);
+		return true;
 		break;
 	}
+
+
 
 	//sf:Color(115,115,115);
 	//sF::Color(128,128,128);

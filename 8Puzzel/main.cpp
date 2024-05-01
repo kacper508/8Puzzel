@@ -6,6 +6,7 @@
 #include "Score.h"
 #include "Button.h"
 #include "Shuffle.h"
+#include "Solver.h"
 
 int main()
 {
@@ -17,11 +18,14 @@ int main()
 
     Board Board(MyFont);
     Score Score(MyFont);
-    Button ButtonShuffel(700,50,50,20,MyFont,"Shuffel", sf::Color(140,140,140), sf::Color(128,128,128), sf::Color(115,115,115));
-    Button ButtonNext(600, 500, 50, 20, MyFont, "Next", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
-    Button ButtonBack(750, 500, 50, 20, MyFont, "Back", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
+
+    Button ButtonShuffel(670,50,100,40,MyFont,"Shuffel", sf::Color(140,140,140), sf::Color(128,128,128), sf::Color(115,115,115));
+    Button ButtonNext(300, 500, 80, 40, MyFont, "Next", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
+    Button ButtonBack(450, 500, 80, 40, MyFont, "Back", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
+    Button ButtonSolve(650, 650, 80, 40, MyFont, "Solve", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
 
     Shuffle Shuffle;
+    Solver PuzzelSolver(MyFont);
 
     while (window.isOpen())
     {
@@ -75,31 +79,58 @@ int main()
                         {
                             //RESET GAME
                             Board.setPauseValue(true);
-                            Shuffle.shuffleArray();
-                            Shuffle.copyValuesToBoard(Board);
+                            Shuffle.shuffleArray(Board);
+                            PuzzelSolver.getValues(Board);
+                            PuzzelSolver.updateSolverBoard();
                             Score.reset();
                             Board.updateZeroPosition();
                             Board.updateBoard();
 
-                            //std::cout << "Spacje\n";
+                        }
+                        if (event.key.code == sf::Keyboard::S)
+                        {
+                            //Solve Puzzel
+                            //PuzzelSolver.solve();
+                        }
+                        if (event.key.code == sf::Keyboard::A)
+                        {
+                            //Back
+                        }
+                        if (event.key.code == sf::Keyboard::D)
+                        {
+                            //Next
                         }
                 }
+            }
+
+            if (ButtonShuffel.update(sf::Vector2f(sf::Mouse::getPosition(window))))
+            {
+                //RESET GAME
+                Board.setPauseValue(true);
+                Shuffle.shuffleArray(Board);
+                PuzzelSolver.getValues(Board);
+                PuzzelSolver.updateSolverBoard();
+                Score.reset();
+                Board.updateZeroPosition();
+                Board.updateBoard();
             }
 
             window.clear();
 
             Board.drawBoard(window);
             Score.draw(window);
+            PuzzelSolver.drawSolverBoard(window);
+
             ButtonShuffel.drawButton(window);
             ButtonBack.drawButton(window);
             ButtonNext.drawButton(window);
+            ButtonSolve.drawButton(window);
 
             window.display();
 
             if (Board.checkIfOver() == true)
             {
                 Board.setPauseValue(false);
-                //std::cout << "OVER!!!\n";
             }
 
     }

@@ -16,7 +16,7 @@ public:
 	Shuffle();
 	~Shuffle();
 
-	void shuffleArray();
+	void shuffleArray(Board& board);
 	void copyValuesToBoard(Board &board);
 };
 

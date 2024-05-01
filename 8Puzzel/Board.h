@@ -28,7 +28,7 @@ public:
 	
 	bool moveValue(char moveDirection);
 
-	void createBoard(sf::Font &Font);
+	void createBoard(sf::Font& Font);
 	void drawBoard(sf::RenderWindow &window);
 	void updateBoard();
 
@@ -39,6 +39,7 @@ public:
 	~Board();
 
 	friend class Shuffle;
+	friend class Solver;
 
 };
 

@@ -28,5 +28,8 @@ public:
 	void setSquareTextString(std::string TextValue);
 	void setSquareTextFont(sf::Font Font);
 	void setSquareTextPosition(sf::Vector2f Position);
+
+	void setSquareSize(sf::Vector2f Size);
+	void setSquareTextColor(sf::Color TextColor);
 };
 

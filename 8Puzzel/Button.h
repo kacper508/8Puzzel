@@ -27,6 +27,6 @@ public:
 	const bool isPressed();
 
 	void drawButton(sf::RenderWindow& window);
-	void update(const sf::Vector2f mousePosition);
+	bool update(const sf::Vector2f mousePosition);
 };
 

@@ -54,4 +54,9 @@ void Square::setSquareTextPosition(sf::Vector2f Position)
 	this->SquareText.setPosition(Position);
 }
 
+void Square::setSquareSize(sf::Vector2f Size)
+{
+	this->SquareShape.setSize(Size);
+}
+
 
