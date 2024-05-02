@@ -9,12 +9,12 @@
 
 
 
-Board::Board(sf::Font &Font)
+Board::Board(sf::Font &Font, sf::Texture& texture)
 {
 	this->BoardShape.setFillColor(sf::Color::White);
 	this->BoardShape.setPosition(155, 5);
 	this->BoardShape.setSize(sf::Vector2f(490,490));
-	createBoard(Font);
+	createBoard(Font, texture);
 	updateZeroPosition();
 }
 
@@ -58,7 +58,7 @@ bool Board::moveValue(char moveDirection)
 	return false;
 }
 
-void Board::createBoard(sf::Font &Font)
+void Board::createBoard(sf::Font &Font, sf::Texture texture)
 {
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -79,6 +79,46 @@ void Board::createBoard(sf::Font &Font)
 			newSquare->setSquareTextFont(Font);
 			newSquare->setSquareTextPosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 			Squares.push_back(newSquare);
+
+			switch (this->valueBoard[i][j])
+			{
+			case '1':
+				newSquare->setSprite(sf::IntRect(0, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "1\n";
+				break;
+			case '2':
+				newSquare->setSprite(sf::IntRect(150, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "2\n";
+				break;
+			case '3':
+				newSquare->setSprite(sf::IntRect(300, 0,150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "3\n";
+				break;
+			case '4':
+				newSquare->setSprite(sf::IntRect(0, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "4\n";
+				break;
+			case '5':
+				newSquare->setSprite(sf::IntRect(150, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "5\n";
+				break;
+			case '6':
+				newSquare->setSprite(sf::IntRect( 300, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "6\n";
+				break;
+			case '7':
+				newSquare->setSprite(sf::IntRect(0, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "7\n";
+				break;
+			case '8':
+				newSquare->setSprite(sf::IntRect(150, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "8\n";
+				break;
+			case '0':
+				newSquare->setSprite(sf::IntRect(300, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "0\n";
+				break;
+			}
 		}
 	}
 }
@@ -88,8 +128,8 @@ void Board::drawBoard(sf::RenderWindow& window)
 	window.draw(this->BoardShape);
 	for (auto square : this->Squares)
 	{
-		window.draw(square->getRectangleShape());
-		//square->drawText(&window);
+		square->drawSquare(window);
+		square->drawSprite(window);
 	}
 }
 
@@ -168,14 +208,3 @@ void Board::setPauseValue(bool value)
 {
 	this->pause = value;
 }
-
-
-
-
-// Uzupełnianie tablicy z wartościami przy ruchu
-
-//FUnkcja checkPosiibleMove ma uzupełniać tablicę z ruchami na podstawie wartości
-
-// Położenie 0 umieścić  w Board, żeby wiedzieć gdzie sięznajduje
-//Po naciśnięciu najpierw sprawdza czy jest możliwośc ruchu w tą strone , ta wartość p w tablicy ruchów
-

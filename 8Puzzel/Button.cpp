@@ -56,11 +56,6 @@ bool Button::update(const sf::Vector2f mousePosition)
 		return true;
 		break;
 	}
-
-
-
-	//sf:Color(115,115,115);
-	//sF::Color(128,128,128);
 }
 
 const bool Button::isPressed()

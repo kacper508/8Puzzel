@@ -28,7 +28,5 @@ public:
 	void updateSolverBoard();
 
 	void textSettings(sf::Font& Font);
-
-
 };
 

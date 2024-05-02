@@ -6,7 +6,6 @@ Solver::Solver(sf::Font& Font)
 	TextInsideSquares.resize(9);
 	textSettings(Font);
 	createSolverBoard(Font);
-
 }
 
 Solver::~Solver()
@@ -16,7 +15,7 @@ Solver::~Solver()
 void Solver::textSettings(sf::Font& Font)
 {
 	int index = 0;
-	for (auto text : TextInsideSquares)
+	for (sf::Text text : TextInsideSquares)
 	{
 		text.setFillColor(sf::Color::White);
 		text.setStyle(sf::Text::Bold);
@@ -36,33 +35,15 @@ void Solver::getValues(Board& Board)
 			this->values[i][j] = Board.valueBoard[i][j];
 		}
 	}
-
-	//for (int i = 0; i < BOARD_SIZE; i++)
-	//{
-	//	for (int j = 0; j < BOARD_SIZE; j++)
-	//	{
-	//		std::cout << this->values[i][j] << " ";
-	//	}
-	//	std::cout << "\n";
-	//}
 }
 
 void Solver::drawSolverBoard(sf::RenderWindow& window)
 {
-	//for (auto& text : this->TextInsideSquares)
-	//{
-	//	window.draw(text);
-	//	std::string t = text.getString();
-	//	std::cout << t << "  |";
-	//}
-	//std::cout << "\n ";
-
 	for (auto& square : this->Squares)
 	{
 		window.draw(square.getRectangleShape());
 		//window.draw(square.getText());
 	}
-
 }
 
 void Solver::updateSolverBoard()
@@ -76,7 +57,6 @@ void Solver::updateSolverBoard()
 			index++;
 		}
 	}
-
 }
 
 void Solver::createSolverBoard(sf::Font& Font)
@@ -94,10 +74,8 @@ void Solver::createSolverBoard(sf::Font& Font)
 
 			this->Squares[index].setSquareTextString(std::to_string(this->Squares[index].getValue()));
 			this->Squares[index].setSquareTextFont(Font);
-			//this->Squares[index].setTen(sf::Vector2f(200 + j * (40), 600 + i * 40));
 
 			this->TextInsideSquares[index].setString(std::to_string(this->Squares[index].getValue()-48));
-
 
 			index++;
 		}

@@ -12,11 +12,18 @@ int main()
 {
     srand(time(0));
 
+    sf::Texture texture;
+    texture.loadFromFile("BoardTexture.jpg",sf::IntRect(0,0,450,450));
+    if(!texture.loadFromFile("BoardTexture.jpg"))
+    {
+        std::cout << "tr\n";
+    }
+
     sf::Font MyFont;
     MyFont.loadFromFile("arial.ttf");
     sf::RenderWindow window(sf::VideoMode(800, 800), "8 Puzzels");
 
-    Board Board(MyFont);
+    Board Board(MyFont,texture);
     Score Score(MyFont);
 
     Button ButtonShuffel(670,50,100,40,MyFont,"Shuffel", sf::Color(140,140,140), sf::Color(128,128,128), sf::Color(115,115,115));

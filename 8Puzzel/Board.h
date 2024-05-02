@@ -21,14 +21,14 @@ private:
 	};
 
 public:
-	Board(sf::Font &Font);
+	Board(sf::Font &Font, sf::Texture& texture);
 
 	bool getPauseValue();
 	void setPauseValue(bool value);
 	
 	bool moveValue(char moveDirection);
 
-	void createBoard(sf::Font& Font);
+	void createBoard(sf::Font& Font, sf::Texture texture);
 	void drawBoard(sf::RenderWindow &window);
 	void updateBoard();
 
