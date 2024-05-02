@@ -42,7 +42,6 @@ void Solver::drawSolverBoard(sf::RenderWindow& window)
 	for (auto& square : this->Squares)
 	{
 		window.draw(square.getRectangleShape());
-		//window.draw(square.getText());
 	}
 }
 
@@ -67,16 +66,9 @@ void Solver::createSolverBoard(sf::Font& Font)
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			this->Squares[index].setValue(this->values[i][j]);
-
 			this->Squares[index].setSquarePosition(sf::Vector2f(200 + j * (40+5), 600+i*(40+5)));
 			this->Squares[index].setSquareFillColor(sf::Color::Blue);
 			this->Squares[index].setSquareSize(sf::Vector2f(40, 40));
-
-			this->Squares[index].setSquareTextString(std::to_string(this->Squares[index].getValue()));
-			this->Squares[index].setSquareTextFont(Font);
-
-			this->TextInsideSquares[index].setString(std::to_string(this->Squares[index].getValue()-48));
-
 			index++;
 		}
 	}

@@ -23,6 +23,7 @@ void Square::drawSquare(sf::RenderWindow& window)
 {
 	window.draw(this->SquareShape);
 	//window.draw(this->SquareText);
+	window.draw(this->Shape);
 }
 
 char Square::getValue()

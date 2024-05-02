@@ -8,31 +8,42 @@
 #include "Shuffle.h"
 #include "Solver.h"
 
+
+
 int main()
 {
     srand(time(0));
 
+    // Loading the Texture
     sf::Texture texture;
-    texture.loadFromFile("BoardTexture.jpg",sf::IntRect(0,0,450,450));
-    if(!texture.loadFromFile("BoardTexture.jpg"))
+    texture.loadFromFile("BoardTexture.jpg");  
+    if (!texture.loadFromFile("BoardTexture.jpg", sf::IntRect(0, 0, 450, 450)))
     {
-        std::cout << "tr\n";
+        return EXIT_FAILURE;
+    }
+    
+    // Loading the Font
+    sf::Font MyFont;
+    MyFont.loadFromFile("Arial.ttf");
+    if (!MyFont.loadFromFile("Arial.ttf"))
+    {
+        return EXIT_FAILURE;
     }
 
-    sf::Font MyFont;
-    MyFont.loadFromFile("arial.ttf");
+    // Render Window
     sf::RenderWindow window(sf::VideoMode(800, 800), "8 Puzzels");
 
-    Board Board(MyFont,texture);
+    // 
+    Board Board(MyFont, texture);
     Score Score(MyFont);
+    Shuffle Shuffle;
+    Solver PuzzelSolver(MyFont);
 
+    // Buttons
     Button ButtonShuffel(670,50,100,40,MyFont,"Shuffel", sf::Color(140,140,140), sf::Color(128,128,128), sf::Color(115,115,115));
     Button ButtonNext(300, 500, 80, 40, MyFont, "Next", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
     Button ButtonBack(450, 500, 80, 40, MyFont, "Back", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
     Button ButtonSolve(650, 650, 80, 40, MyFont, "Solve", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
-
-    Shuffle Shuffle;
-    Solver PuzzelSolver(MyFont);
 
     while (window.isOpen())
     {
@@ -84,7 +95,7 @@ int main()
                     }
                         if (event.key.code == sf::Keyboard::Space)
                         {
-                            //RESET GAME
+                            // RESET GAME
                             Board.setPauseValue(true);
                             Shuffle.shuffleArray(Board);
                             PuzzelSolver.getValues(Board);
@@ -96,16 +107,16 @@ int main()
                         }
                         if (event.key.code == sf::Keyboard::S)
                         {
-                            //Solve Puzzel
-                            //PuzzelSolver.solve();
+                            // Solve Puzzel
+                            // PuzzelSolver.solve();
                         }
                         if (event.key.code == sf::Keyboard::A)
                         {
-                            //Back
+                            // Back
                         }
                         if (event.key.code == sf::Keyboard::D)
                         {
-                            //Next
+                            // Next
                         }
                 }
             }
@@ -121,10 +132,12 @@ int main()
                 Board.updateZeroPosition();
                 Board.updateBoard();
             }
-
+            // Clear the window
             window.clear();
 
+            // Draw
             Board.drawBoard(window);
+            //Board.drawText(window);
             Score.draw(window);
             PuzzelSolver.drawSolverBoard(window);
 
@@ -133,13 +146,15 @@ int main()
             ButtonNext.drawButton(window);
             ButtonSolve.drawButton(window);
 
-            window.display();
 
+            // Check if it is over
             if (Board.checkIfOver() == true)
             {
                 Board.setPauseValue(false);
             }
 
+            // Display
+            window.display();
     }
 
     return 0;
