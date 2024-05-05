@@ -34,7 +34,8 @@ public:
 	void setSquareSize(sf::Vector2f Size);
 	void setSquareTextColor(sf::Color TextColor);
 
-	void setSprite(sf::IntRect(rect), sf::Vector2f(pos));
+	void setSprite(sf::Texture& texture, sf::IntRect(rect), sf::Vector2f(pos));
 	void drawSprite(sf::RenderWindow& window);
+	void updateSprite(sf::IntRect(rect), sf::Vector2f(pos));
 };
 

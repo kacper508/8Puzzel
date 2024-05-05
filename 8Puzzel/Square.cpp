@@ -65,8 +65,9 @@ void Square::setSquareSize(sf::Vector2f Size)
 	this->SquareShape.setSize(Size);
 }
 
-void Square::setSprite(sf::IntRect(rect), sf::Vector2f(pos))
+void Square::setSprite(sf::Texture& texture, sf::IntRect(rect), sf::Vector2f(pos))
 {
+	this->Shape.setTexture(texture);
 	this->Shape.setTextureRect(rect);
 	this->Shape.setPosition(pos);
 }
@@ -74,6 +75,12 @@ void Square::setSprite(sf::IntRect(rect), sf::Vector2f(pos))
 void Square::drawSprite(sf::RenderWindow& window)
 {
 	window.draw(this->Shape);
+}
+
+void Square::updateSprite(sf::IntRect(rect), sf::Vector2f(pos))
+{
+	this->Shape.setTextureRect(rect);
+	this->Shape.setPosition(pos);
 }
 
 

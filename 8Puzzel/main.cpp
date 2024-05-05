@@ -32,7 +32,7 @@ int main()
     Button ButtonSolve(650, 650, 80, 40, MyFont, "Solve", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
 
     Shuffle Shuffle;
-    Solver PuzzelSolver(MyFont);
+    Solver PuzzleSolver(MyFont, Board);
 
     while (window.isOpen())
     {
@@ -87,8 +87,8 @@ int main()
                             //RESET GAME
                             Board.setPauseValue(true);
                             Shuffle.shuffleArray(Board);
-                            PuzzelSolver.getValues(Board);
-                            PuzzelSolver.updateSolverBoard();
+                            PuzzleSolver.getValues(Board);
+                            PuzzleSolver.updateSolverBoard();
                             Score.reset();
                             Board.updateZeroPosition();
                             Board.updateBoard();
@@ -115,8 +115,8 @@ int main()
                 //RESET GAME
                 Board.setPauseValue(true);
                 Shuffle.shuffleArray(Board);
-                PuzzelSolver.getValues(Board);
-                PuzzelSolver.updateSolverBoard();
+                PuzzleSolver.getValues(Board);
+                PuzzleSolver.updateSolverBoard();
                 Score.reset();
                 Board.updateZeroPosition();
                 Board.updateBoard();
@@ -126,7 +126,7 @@ int main()
 
             Board.drawBoard(window);
             Score.draw(window);
-            PuzzelSolver.drawSolverBoard(window);
+            PuzzleSolver.drawSolverBoard(window);
 
             ButtonShuffel.drawButton(window);
             ButtonBack.drawButton(window);

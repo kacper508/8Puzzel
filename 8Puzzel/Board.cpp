@@ -15,6 +15,9 @@ Board::Board(sf::Font &Font, sf::Texture& texture)
 	this->BoardShape.setPosition(155, 5);
 	this->BoardShape.setSize(sf::Vector2f(490,490));
 	createBoard(Font, texture);
+	Texts.resize(9);
+
+	createTexts(Font);
 	updateZeroPosition();
 }
 
@@ -58,7 +61,7 @@ bool Board::moveValue(char moveDirection)
 	return false;
 }
 
-void Board::createBoard(sf::Font &Font, sf::Texture texture)
+void Board::createBoard(sf::Font &Font, sf::Texture& texture)
 {
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -83,39 +86,39 @@ void Board::createBoard(sf::Font &Font, sf::Texture texture)
 			switch (this->valueBoard[i][j])
 			{
 			case '1':
-				newSquare->setSprite(sf::IntRect(0, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(0, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "1\n";
 				break;
 			case '2':
-				newSquare->setSprite(sf::IntRect(150, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(150, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "2\n";
 				break;
 			case '3':
-				newSquare->setSprite(sf::IntRect(300, 0,150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(300, 0,150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "3\n";
 				break;
 			case '4':
-				newSquare->setSprite(sf::IntRect(0, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(0, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "4\n";
 				break;
 			case '5':
-				newSquare->setSprite(sf::IntRect(150, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(150, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "5\n";
 				break;
 			case '6':
-				newSquare->setSprite(sf::IntRect( 300, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect( 300, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "6\n";
 				break;
 			case '7':
-				newSquare->setSprite(sf::IntRect(0, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(0, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "7\n";
 				break;
 			case '8':
-				newSquare->setSprite(sf::IntRect(150, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(150, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "8\n";
 				break;
 			case '0':
-				newSquare->setSprite(sf::IntRect(300, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				newSquare->setSprite(texture, sf::IntRect(300, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
 				std::cout << "0\n";
 				break;
 			}
@@ -131,6 +134,11 @@ void Board::drawBoard(sf::RenderWindow& window)
 		square->drawSquare(window);
 		square->drawSprite(window);
 	}
+
+	for (sf::Text text : Texts)
+	{
+		window.draw(text);
+	}
 }
 
 void Board::updateBoard()
@@ -144,15 +152,60 @@ void Board::updateBoard()
 			{
 				this->Squares[index]->setSquareFillColor(sf::Color::Blue);
 				this->Squares[index]->setValue(this->valueBoard[i][j]);
-				this->Squares[index]->setSquareTextString(std::to_string(valueBoard[i][j]));
+				this->Squares[index]->setSquareTextString(std::to_string(valueBoard[i][j]-48));
+
+				this->Texts[index].setString(std::to_string(valueBoard[i][j]-48));
 			}
 			else if (valueBoard[i][j] == '0')
 			{
 				this->Squares[index]->setSquareFillColor(sf::Color::Red);
 				this->Squares[index]->setValue(this->valueBoard[i][j]);
-				this->Squares[index]->setSquareTextString(std::to_string(valueBoard[i][j]));
+				this->Squares[index]->setSquareTextString(std::to_string(valueBoard[i][j]-48));
+
+				this->Texts[index].setString(std::to_string(valueBoard[i][j]-48));
+			}
+
+				switch (this->valueBoard[i][j])
+			{
+			case '1':
+				this->Squares[index]->updateSprite(sf::IntRect(0, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "1\n";
+				break;
+			case '2':
+				this->Squares[index]->updateSprite(sf::IntRect(150, 0, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "2\n";
+				break;
+			case '3':
+				this->Squares[index]->updateSprite(sf::IntRect(300, 0,150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "3\n";
+				break;
+			case '4':
+				this->Squares[index]->updateSprite(sf::IntRect(0, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "4\n";
+				break;
+			case '5':
+				this->Squares[index]->updateSprite(sf::IntRect(150, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "5\n";
+				break;
+			case '6':
+				this->Squares[index]->updateSprite(sf::IntRect( 300, 150, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "6\n";
+				break;
+			case '7':
+				this->Squares[index]->updateSprite(sf::IntRect(0, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "7\n";
+				break;
+			case '8':
+				this->Squares[index]->updateSprite(sf::IntRect(150, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "8\n";
+				break;
+			case '0':
+				this->Squares[index]->updateSprite(sf::IntRect(300, 300, 150, 150), sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+				std::cout << "0\n";
+				break;
 			}
 				index++;
+
 		}
 	}
 }
@@ -196,6 +249,22 @@ Board::~Board()
 	for (auto square : Squares)
 	{
 		delete square;
+	}
+}
+
+void Board::createTexts(sf::Font& Font)
+{
+	int index = 0;
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		for (int j = 0; j < BOARD_SIZE; j++)
+		{
+			this->Texts[index].setFont(Font);
+			this->Texts[index].setString(std::to_string(valueBoard[i][j]-48));
+			this->Texts[index].setFillColor(sf::Color::White);
+			this->Texts[index].setPosition(sf::Vector2f(((WINDOW_WIDTH - SQUARE_SIZE * BOARD_SIZE - SPACE_BETWEEN_SQUARES * 2) / 2) + j * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES), SPACE_BETWEEN_SQUARES + i * (SQUARE_SIZE + SPACE_BETWEEN_SQUARES)));
+			index++;
+		}
 	}
 }
 

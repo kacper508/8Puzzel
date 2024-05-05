@@ -24,6 +24,7 @@
     <ProjectGuid>{7dfc787d-4264-410e-9e55-b08414de4c39}</ProjectGuid>
     <RootNamespace>My8Puzzel</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>8Puzzle</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -143,6 +144,7 @@
     <ClCompile Include="BoardText.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Shuffle.cpp" />
     <ClCompile Include="Solver.cpp" />
@@ -154,6 +156,7 @@
     <ClInclude Include="BoardText.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Shuffle.h" />
     <ClInclude Include="Solver.h" />
