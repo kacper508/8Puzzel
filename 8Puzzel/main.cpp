@@ -21,14 +21,14 @@ int main()
 
     sf::Font MyFont;
     MyFont.loadFromFile("arial.ttf");
-    sf::RenderWindow window(sf::VideoMode(800, 800), "8 Puzzels");
+    sf::RenderWindow window(sf::VideoMode(800, 800), "8 Puzzeles");
 
     Board Board(MyFont,texture);
     Score Score(MyFont);
 
     Button ButtonShuffel(670,50,100,40,MyFont,"Shuffel", sf::Color(140,140,140), sf::Color(128,128,128), sf::Color(115,115,115));
-    Button ButtonNext(300, 500, 80, 40, MyFont, "Next", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
-    Button ButtonBack(450, 500, 80, 40, MyFont, "Back", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
+    Button ButtonNext(300, 500, 80, 40, MyFont, "Back", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
+    Button ButtonBack(450, 500, 80, 40, MyFont, "Next", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
     Button ButtonSolve(650, 650, 80, 40, MyFont, "Solve", sf::Color(140, 140, 140), sf::Color(128, 128, 128), sf::Color(115, 115, 115));
 
     Shuffle Shuffle;
@@ -87,25 +87,29 @@ int main()
                             //RESET GAME
                             Board.setPauseValue(true);
                             Shuffle.shuffleArray(Board);
-                            PuzzleSolver.getValues(Board);
-                            PuzzleSolver.updateSolverBoard();
+
                             Score.reset();
                             Board.updateZeroPosition();
                             Board.updateBoard();
-
                         }
                         if (event.key.code == sf::Keyboard::S)
                         {
                             //Solve Puzzel
-                            //PuzzelSolver.solve();
+                            PuzzleSolver.getValues(Board);
+                            PuzzleSolver.updateSolverBoard(Board);
+
                         }
                         if (event.key.code == sf::Keyboard::A)
                         {
+                            PuzzleSolver.changeOrder('b');
+                            PuzzleSolver.updateSolverBoard(Board);
                             //Back
                         }
                         if (event.key.code == sf::Keyboard::D)
                         {
                             //Next
+                            PuzzleSolver.changeOrder('n');
+                            PuzzleSolver.updateSolverBoard(Board);
                         }
                 }
             }
@@ -115,11 +119,12 @@ int main()
                 //RESET GAME
                 Board.setPauseValue(true);
                 Shuffle.shuffleArray(Board);
-                PuzzleSolver.getValues(Board);
-                PuzzleSolver.updateSolverBoard();
+
                 Score.reset();
                 Board.updateZeroPosition();
                 Board.updateBoard();
+
+                //PuzzleSolver.getValues(Board);
             }
 
             window.clear();

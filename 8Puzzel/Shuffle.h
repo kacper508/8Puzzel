@@ -18,5 +18,7 @@ public:
 
 	void shuffleArray(Board& board);
 	void copyValuesToBoard(Board &board);
+	int getInversionCount();
+	bool isSolvable();
 };
 
